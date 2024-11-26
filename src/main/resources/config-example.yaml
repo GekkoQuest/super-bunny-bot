@@ -1,0 +1,16 @@
+bot:
+  name: "SuperBunnyBot"
+  version: "0.1"
+
+api:
+  twitch_client_id: YOUR_CLIENT_ID
+  twitch_client_secret: YOUR_CLIENT_SECRET
+
+credentials:
+  irc: YOUR_OAUTH_TOKEN
+
+# Channels that the bot should be active in
+channels:
+  - Twitch
+  - TenZ
+  - Kyedae
