@@ -23,11 +23,7 @@ public class ClipCommand implements Command {
     public void execute(ChannelMessageEvent event, String[] args) {
         final String channelName = event.getChannel().getName();
 
-        final boolean isChannelLive = superBunnyBot.getChannelDataService().getChannelData(channelName).isLive();
-        if (!isChannelLive) {
-            event.getTwitchChat().sendMessage(channelName, "Cannot clip a channel that is currently offline!");
-            return;
-        }
+        // TODO: Check if channel is live.
 
         final String clipLink = superBunnyBot.getClipService().createClip("");
         event.getTwitchChat().sendMessage(channelName, clipLink);

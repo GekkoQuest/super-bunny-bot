@@ -1,7 +1,6 @@
 package quest.gekko.superbunnybot.listener.chat;
 
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
-import com.github.philippheuer.events4j.simple.domain.EventSubscriber;
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
 import quest.gekko.superbunnybot.SuperBunnyBot;
 
@@ -13,9 +12,7 @@ public class ChannelMessageListener {
         this.superBunnyBot = superBunnyBot;
     }
 
-    @EventSubscriber
     public void onChannelMessage(final ChannelMessageEvent event) {
         superBunnyBot.getCommandManager().handleCommand(event);
     }
-
 }

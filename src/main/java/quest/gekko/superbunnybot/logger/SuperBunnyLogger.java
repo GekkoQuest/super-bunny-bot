@@ -6,15 +6,15 @@ import org.slf4j.LoggerFactory;
 public class SuperBunnyLogger {
     private static final Logger LOGGER = LoggerFactory.getLogger(SuperBunnyLogger.class);
 
-    public static void info(String message) {
+    public static void info(final String message) {
         LOGGER.info(message);
     }
 
-    public static void warn(String message) {
+    public static void warn(final String message) {
         LOGGER.warn(message);
     }
 
-    public static void error(String message, final Throwable throwable) {
+    public static void error(final String message, final Throwable throwable) {
         LOGGER.error(message, throwable);
     }
 }

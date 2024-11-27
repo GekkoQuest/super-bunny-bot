@@ -17,10 +17,10 @@ import quest.gekko.superbunnybot.service.twitch.TwitchService;
 
 @Getter
 public class SuperBunnyBot {
-    private final TwitchService twitchService;
     private final Configuration configuration;
     private final CredentialsProvider credentialsProvider;
 
+    private TwitchService twitchService;
     private ClipService clipService;
     private CommandManager commandManager;
 
@@ -29,18 +29,18 @@ public class SuperBunnyBot {
         configuration = configurationLoader.loadConfiguration();
 
         credentialsProvider = new CredentialsProvider(configuration);
-        twitchService = new TwitchService(configuration, credentialsProvider);
     }
 
     public void registerListeners() {
         final SimpleEventHandler eventHandler = twitchService.getTwitchClient().getEventManager().getEventHandler(SimpleEventHandler.class);
 
         new ChannelGoLiveListener(eventHandler);
-        new ChannelGoOfflineListener(eventHandler, this);
+        new ChannelGoOfflineListener(eventHandler);
         new ChannelMessageListener(eventHandler, this);
     }
 
     public void registerServices() {
+        twitchService = new TwitchService(configuration, credentialsProvider);
         clipService = new ClipService(twitchService.getTwitchClient(), credentialsProvider);
     }
 
