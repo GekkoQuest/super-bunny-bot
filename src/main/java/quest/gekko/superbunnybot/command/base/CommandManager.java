@@ -26,8 +26,6 @@ public class CommandManager {
 
         final Command command = commandMap.get(commandName);
 
-        System.out.println(commandName + " : " + command.toString());
-
         if (command == null)
             return;
 

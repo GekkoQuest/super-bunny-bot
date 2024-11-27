@@ -1,4 +1,4 @@
-package quest.gekko.superbunnybot.listener;
+package quest.gekko.superbunnybot.listener.state;
 
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.events.ChannelGoOfflineEvent;

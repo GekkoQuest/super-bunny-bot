@@ -1,16 +1,20 @@
 package quest.gekko.superbunnybot.service.clip;
 
 import com.github.twitch4j.ITwitchClient;
-import lombok.RequiredArgsConstructor;
-import quest.gekko.superbunnybot.SuperBunnyBot;
+import quest.gekko.superbunnybot.logger.SuperBunnyLogger;
+import quest.gekko.superbunnybot.provider.CredentialsProvider;
 
-@RequiredArgsConstructor
 public class ClipService {
-    private final SuperBunnyBot superBunnyBot;
+    private final ITwitchClient twitchClient;
+    private final CredentialsProvider credentialsProvider;
+
+    public ClipService(final ITwitchClient twitchClient, final CredentialsProvider credentialsProvider) {
+        this.twitchClient = twitchClient;
+        this.credentialsProvider = credentialsProvider;
+    }
 
     public String createClip(final String channelName) {
-        final ITwitchClient twitchClient = superBunnyBot.getTwitchClient();
-        final String authToken = superBunnyBot.getConfiguration().getCredentials().get("irc").substring(6);
+        final String authToken = credentialsProvider.getAuthToken();
 
         try {
             return twitchClient.getHelix()
@@ -19,7 +23,7 @@ public class ClipService {
                     .getData().getFirst()
                     .getEditUrl();
         } catch (final Exception ex) {
-            ex.printStackTrace();
+            SuperBunnyLogger.error("Failed to create clip!", ex);
             return null;
         }
     }
