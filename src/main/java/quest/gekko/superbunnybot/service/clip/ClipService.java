@@ -1,31 +1,31 @@
 package quest.gekko.superbunnybot.service.clip;
 
-import com.github.twitch4j.ITwitchClient;
-import quest.gekko.superbunnybot.logger.SuperBunnyLogger;
-import quest.gekko.superbunnybot.provider.CredentialsProvider;
+import com.github.twitch4j.TwitchClient;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import quest.gekko.superbunnybot.configuration.TwitchProperties;
 
+@Slf4j
+@Service
+@RequiredArgsConstructor
 public class ClipService {
-    private final ITwitchClient twitchClient;
-    private final CredentialsProvider credentialsProvider;
+    private final TwitchClient twitchClient;
+    private final TwitchProperties twitchProperties;
 
-    public ClipService(final ITwitchClient twitchClient, final CredentialsProvider credentialsProvider) {
-        this.twitchClient = twitchClient;
-        this.credentialsProvider = credentialsProvider;
-    }
-
-    public String createClip(final String channelName) {
-        final String authToken = credentialsProvider.getAuthToken();
+    public String createClip(final String channelId) {
+        final String authToken = twitchProperties.getAuthToken();
 
         try {
             return twitchClient.getHelix()
-                    .createClip(authToken, channelName, false)
-                    .execute()
-                    .getData().getFirst()
-                    .getEditUrl();
+                            .createClip(authToken, channelId, false)
+                            .execute()
+                            .getData()
+                            .getFirst()
+                            .getEditUrl();
         } catch (final Exception ex) {
-            SuperBunnyLogger.error("Failed to create clip!", ex);
-            return null;
+            log.error("Failed to create clip", ex);
+            return "Unable to generate clip.";
         }
     }
-
 }
