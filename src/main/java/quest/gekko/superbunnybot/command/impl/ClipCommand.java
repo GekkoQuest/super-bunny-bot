@@ -1,6 +1,7 @@
 package quest.gekko.superbunnybot.command.impl;
 
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import quest.gekko.superbunnybot.command.base.Command;
 import quest.gekko.superbunnybot.command.base.CommandQualifier;
@@ -9,14 +10,10 @@ import quest.gekko.superbunnybot.service.clip.ClipService;
 
 @Component
 @CommandQualifier
+@RequiredArgsConstructor
 public class ClipCommand implements Command {
     private final ClipService clipService;
     private final ChannelDataService channelDataService;
-
-    public ClipCommand(final ClipService clipService) {
-        this.clipService = clipService;
-        this.channelDataService = new ChannelDataService();
-    }
 
     @Override
     public String getName() {
