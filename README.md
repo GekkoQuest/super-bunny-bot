@@ -51,7 +51,7 @@ Run the application
 To deploy this project run
 
 ```bash
-  Different forms of deployment will be added soon.
+  Different forms of deployment methods will be added soon.
 ```
 
 
